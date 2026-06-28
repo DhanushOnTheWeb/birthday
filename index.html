@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magical Birthday Celebration! 🎉</title>
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Outfit:wght@300;400;600;800&family=Pacifico&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="theme-carnival">
+    <!-- Sparkle Trail Canvas -->
+    <canvas id="trail-canvas"></canvas>
+
+    <!-- Background Decoration Grid & Glowing Orbs -->
+    <div class="decorations">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+
+
+    <!-- Main Container -->
+    <main class="container">
+        <!-- Floating Score/Pop Game Widget -->
+        <div class="game-score-widget">
+            <span>🎈 Popped: <strong id="pop-count">0</strong></span>
+        </div>
+
+        <!-- Banner Header -->
+        <header class="hero-header">
+            <div class="badge animate-bounce">✨ Happy Birthday ✨</div>
+            <h1 class="celebration-title">Happy Birthday, <span id="display-name" class="gradient-text">Sowjanya S</span>!</h1>
+            <p class="celebration-subtitle">Celebrating the wonderful <span id="display-relation">Birthday Star</span> today!</p>
+        </header>
+
+        <!-- Dynamic Grid Layout -->
+        <div class="layout-grid">
+            
+            <!-- COLUMN 1: The Magic Cake and Candle Blowing -->
+            <section class="grid-card cake-section">
+                <div class="card-glow"></div>
+                <h2 class="card-title"><i class="fa-solid fa-cake-candles"></i> Make a Wish</h2>
+                <p class="card-desc">Enable the mic and blow the candles 😮‍💨!</p>
+                
+                <div class="cake-container">
+                    <div class="cake-wrapper">
+                        <!-- Candles Container -->
+                        <div class="candles-row">
+                            <!-- Candle 1 -->
+                            <div class="candle active-candle" id="candle-1">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                                <div class="candle-body"></div>
+                            </div>
+                            <!-- Candle 2 -->
+                            <div class="candle active-candle" id="candle-2">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                                <div class="candle-body"></div>
+                            </div>
+                            <!-- Candle 3 -->
+                            <div class="candle active-candle" id="candle-3">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                                <div class="candle-body"></div>
+                            </div>
+                            <!-- Candle 4 -->
+                            <div class="candle active-candle" id="candle-4">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                                <div class="candle-body"></div>
+                            </div>
+                            <!-- Candle 5 -->
+                            <div class="candle active-candle" id="candle-5">
+                                <div class="flame"></div>
+                                <div class="smoke"></div>
+                                <div class="candle-body"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Cake Layers Structure -->
+                        <div class="cake-top-layer">
+                            <div class="cream-drips">
+                                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="cake-bottom-layer">
+                            <div class="cake-stripes"></div>
+                        </div>
+                        <div class="cake-stand"></div>
+                    </div>
+                </div>
+
+                <div class="cake-controls">
+                    <button class="btn btn-secondary" id="relight-btn">
+                        <i class="fa-solid fa-fire"></i> Relight Candles
+                    </button>
+                    <button class="btn btn-secondary" id="mic-toggle-btn" title="Blow on microphone to extinguish candles">
+                        <i class="fa-solid fa-microphone-slash"></i> Enable Mic Blowing
+                    </button>
+                </div>
+            </section>
+
+            <!-- COLUMN 2: The Interactive Mailbox Wish Card -->
+            <section class="grid-card mailbox-section">
+                <div class="card-glow"></div>
+                <h2 class="card-title"><i class="fa-regular fa-envelope"></i> Interactive Mailbox</h2>
+                <p class="card-desc">Click the sealed envelope to read your special birthday wish.</p>
+                
+                <div class="mailbox-container">
+                    <div class="envelope-wrapper" id="envelope">
+                        <div class="envelope-back"></div>
+                        <div class="letter" id="letter-content">
+                            <div class="letter-stamp">🎂</div>
+                            <h3 class="letter-title">A Special Note</h3>
+                            <p class="letter-text" id="display-wish">
+                              “Happy Birthday jiiiii 🥰! 🎂💫 Wishing you endless happiness, unforgettable adventures, 
+                              and all the success your heart desires. You make life brighter just by being you — may 
+                              this year bring you everything you’ve been dreaming of. Enjoy your day to the fullest!” 🌹🎉
+                            </p>
+                            <p class="letter-signature">With love & joy ❤️</p>
+                        </div>
+                        <div class="envelope-front"></div>
+                        <div class="envelope-top" id="envelope-lid"></div>
+                    </div>
+                </div>
+                <p class="mailbox-hint"><i class="fa-solid fa-arrow-pointer"></i> Tap to Open / Close</p>
+            </section>
+
+            <!-- COLUMN 3: Polaroid Memory Gallery -->
+            <section class="grid-card gallery-section">
+                <div class="card-glow"></div>
+                <h2 class="card-title"><i class="fa-regular fa-images"></i> Happy Memories</h2>
+                <p class="card-desc">Flip through polaroids of wonderful times spent together.</p>
+                
+                <div class="gallery-container">
+                    <div class="polaroid-deck" id="polaroid-deck">
+                        <!-- Default Slide 1 -->   <!--add photos-->
+                        <div class="polaroid-card active" data-index="0">
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/ph1.jpeg"Birthday Balloons">
+                            </div>
+                            <p class="polaroid-caption">Laughter, joy, and endless smiles! ✨</p>
+                        </div>
+                        <!-- Default Slide 2 -->
+                        <div class="polaroid-card" data-index="1">
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/ph2.jpeg" alt="Sparkling Celebration">
+                            </div>
+                            <p class="polaroid-caption">May your year sparkle like fireflies! 💫</p>
+                        </div>
+                        <!-- Default Slide 3 -->
+                        <div class="polaroid-card" data-index="2">
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/ph3.jpeg" alt="Birthday Lights">
+                            </div>
+                            <p class="polaroid-caption">Keep chasing your dreams! 🚀</p>
+                        </div>
+                         <!-- Default Slide 4 -->
+                        <div class="polaroid-card" data-index="2">
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/ph4.jpeg" alt="Birthday Lights">
+                            </div>
+                            <p class="polaroid-caption">💪 “Believe in yourself — you’re unstoppable!”</p>
+                        </div>
+                         <!-- Default Slide 5 -->
+                        <div class="polaroid-card" data-index="2">
+                            <div class="polaroid-img-wrapper">
+                                <img src="assets/ph5.jpeg" alt="Birthday Lights">
+                            </div>
+                            <p class="polaroid-caption">🌟 “Shine bright, the world needs your light!”</p>
+                        </div>  <!--add photos-->
+                    </div>
+
+                    <!-- Slide Controls -->
+                    <div class="gallery-controls">
+                        <button class="nav-btn" id="prev-slide" aria-label="Previous Slide"><i class="fa-solid fa-chevron-left"></i></button>
+                        <span class="gallery-indicator" id="gallery-indicator">1 / 3</span>
+                        <button class="nav-btn" id="next-slide" aria-label="Next Slide"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLUMN 4: Interactive Mystery Gifts -->
+            <section class="grid-card gifts-section">
+                <div class="card-glow"></div>
+                <h2 class="card-title"><i class="fa-solid fa-gift"></i> Mystery Presents</h2>
+                <p class="card-desc">Click on a gift box to unwrap a virtual birthday surprise!</p>
+                
+                <div class="gifts-container">
+                    <!-- Gift Box 1 -->
+                    <div class="gift-box" id="gift-1">
+                        <div class="gift-lid"></div>
+                        <div class="gift-ribbon-vertical"></div>
+                        <div class="gift-ribbon-horizontal"></div>
+                        <div class="gift-box-body"></div>
+                        <span class="gift-tag">Open Me</span>
+                    </div>
+
+                    <!-- Gift Box 2 -->
+                    <div class="gift-box" id="gift-2">
+                        <div class="gift-lid"></div>
+                        <div class="gift-ribbon-vertical"></div>
+                        <div class="gift-ribbon-horizontal"></div>
+                        <div class="gift-box-body"></div>
+                        <span class="gift-tag">Open Me</span>
+                    </div>
+
+                    <!-- Gift Box 3 -->
+                    <div class="gift-box" id="gift-3">
+                        <div class="gift-lid"></div>
+                        <div class="gift-ribbon-vertical"></div>
+                        <div class="gift-ribbon-horizontal"></div>
+                        <div class="gift-box-body"></div>
+                        <span class="gift-tag">Open Me</span>
+                    </div>
+                </div>
+            <!-- COLUMN 5A: Fortune Cookie Predictions -->
+            <section class="grid-card fortune-section">
+                <div class="card-glow"></div>
+                <h2 class="card-title"><i class="fa-solid fa-cookie-bite"></i> Fortune Cookie</h2>
+                <p class="card-desc">Crack open the digital fortune cookie to reveal a special blessing for your year ahead!</p>
+                
+                <div class="fortune-cookie-container">
+                    <div class="fortune-cookie-wrapper" id="fortune-cookie">
+                        <div class="fortune-cookie-shape">
+                            <div class="cookie-left"></div>
+                            <div class="cookie-right"></div>
+                        </div>
+                        <div class="fortune-paper" id="fortune-paper">
+                            <p class="fortune-text" id="fortune-text">Your future is full of bright possibilities! ✨</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="crack-cookie-btn">
+                        <i class="fa-solid fa-heart-pulse"></i> Crack Cookie
+                    </button>
+                </div>
+            </section>
+
+            <!-- COLUMN 5B: Birthday Prize Wheel -->
+            <section class="grid-card wheel-section">
+                <div class="card-glow"></div>
+                <h2 class="card-title"><i class="fa-solid fa-dharmachakra"></i> Birthday Spin Wheel</h2>
+                <p class="card-desc">Spin the wheel of fortune to win a custom coupon / fun reward!</p>
+                
+                <div class="spin-wheel-container">
+                    <div class="wheel-pointer"><i class="fa-solid fa-location-pin"></i></div>
+                    <div class="wheel-outer">
+                        <canvas id="wheel-canvas-render" width="260" height="260"></canvas>
+                        <div class="wheel-center-pin">🎁</div>
+                    </div>
+                    <button class="btn btn-primary" id="spin-wheel-btn">
+                        <i class="fa-solid fa-rotate"></i> Spin Wheel
+                    </button>
+                </div>
+            </section>
+
+
+            <!-- COLUMN 6: Memory Timeline vertical lane -->
+            <section class="grid-card timeline-section full-width-card">
+                <div class="card-glow"></div>
+                <h2 class="card-title"><i class="fa-solid fa-timeline"></i> Our Memory Lane</h2>
+                <p class="card-desc">A vertical journey highlighting wonderful moments and milestones spent together.</p>
+                
+                <div class="timeline-container-vertical">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-items" id="timeline-items-container">
+                        <!-- Timeline milestones loaded dynamically -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Gift Popup Modal -->
+    <div class="modal" id="gift-modal">
+        <div class="modal-content glassmorphism">
+            <button class="modal-close" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-body text-center">
+                <div class="modal-icon" id="modal-gift-icon">🎁</div>
+                <h3 id="modal-gift-title">Virtual Gift Unwrapped!</h3>
+                <p id="modal-gift-text">Here is your special surprise.</p>
+                <button class="btn btn-primary" id="modal-ok-btn">Awesome!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Audio Widget -->
+    <div class="audio-widget glassmorphism">
+        <div class="audio-pulse" id="audio-wave">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="audio-controls-row">
+            <button class="audio-control-btn" id="play-pause-btn" title="Play Music">
+                <i class="fa-solid fa-play"></i>
+            </button>
+            <div class="audio-track-selector">
+                <select id="track-select" title="Change Background Music">
+                    <option value="happy-birthday-lofi">🎵 Lofi Birthday Track</option>
+                    <option value="happy-birthday-acoustic">🎵 Acoustic Guitar Track</option>
+                    <option value="happy-birthday-orchestra">🎵 Orchestral Happy Birthday</option>
+                    <option value="voice-note" id="track-voice-option" class="hidden">🎙️ Voice Greeting</option>
+                </select>
+            </div>
+            <button class="audio-control-btn" id="mute-btn" title="Mute">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+        </div>
+        <!-- Hidden Audio Players (Streamable Royalty-Free Music) -->
+        <audio id="audio-track-1" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio> <!-- Lofi vibe placeholder -->
+        <audio id="audio-track-2" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio> <!-- Acoustic vibe placeholder -->
+        <audio id="audio-track-3" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"></audio> <!-- Orchestral vibe placeholder -->
+        <audio id="audio-track-4" loop></audio> <!-- Custom Voice Greeting audio player -->
+        
+        <!-- Local Sound FX -->
+        <audio id="sfx-pop" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-84.wav"></audio> <!-- Bubble pop sound -->
+        <audio id="sfx-blow" src="https://assets.mixkit.co/active_storage/sfx/2566/2566-84.wav"></audio> <!-- Blow wind sound -->
+        <audio id="sfx-cheer" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-84.wav"></audio> <!-- Kids cheer / applause -->
+        <audio id="sfx-gift" src="https://assets.mixkit.co/active_storage/sfx/2017/2017-84.wav"></audio> <!-- Sparkle/reveal sound -->
+    </div>
+
+    <!-- Script File -->
+    <script src="script.js"></script>
+</body>
+</html>
