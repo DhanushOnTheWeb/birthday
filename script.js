@@ -763,7 +763,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 showGiftModal({
                      title: "🎰 Wheel Spin Winner! 🎉",
                      icon: "🎁",
-                     text: `Congratulations! You spun the wheel and won: "${prizeWon}". Present this coupon voucher to the sender to redeem your reward! And take a screenshot and send it Mr. Dhanush 😎`
+                     text: `Congratulations! You spun the wheel and won: "${prizeWon}". And take a screenshot and send it Mr. Dhanush 😎`
                 });
                 isWheelSpinning = false;
                 spinWheelBtn.disabled = false;
