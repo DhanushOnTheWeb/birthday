@@ -1309,7 +1309,7 @@ body {
     /* Fixed Widgets mobile adjustment */
     .game-score-widget {
         top: 1rem;
-        right: 1rem;
+        right: 1px;
         font-size: 0.8rem;
         padding: 0.4rem 1rem;
     }
